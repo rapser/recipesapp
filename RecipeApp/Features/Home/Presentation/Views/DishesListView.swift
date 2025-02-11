@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct DishesListView: View {
-    let dishes: [Dish]
-    let onDishSelected: (Dish) -> Void
-    
+    @ObservedObject var viewModel: HomeViewModel
+
     var body: some View {
-        List(dishes) { dish in
-            DishRowView(dish: dish) {
-                onDishSelected(dish)
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
+                ForEach(viewModel.filteredDishes, id: \.id) { dish in
+                    DishCard(dish: dish, onDishSelected: viewModel.navigateToDetail)
+                }
             }
-            .listRowSeparator(.hidden)
+            .padding(.horizontal, 10)
         }
-        .listStyle(.plain)
     }
 }

@@ -13,16 +13,13 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                // Barra de búsqueda
                 SearchBarView(searchText: $viewModel.searchText)
                 
-                DishesListView(
-                    dishes: viewModel.filteredDishes,
-                    onDishSelected: { dish in
-                        viewModel.navigateToDetail(dish: dish)
-                    }
-                )
+                // Lista de platos
+                DishesListView(viewModel: viewModel)
             }
-            .navigationTitle("Recipes")
+            .navigationTitle("Recetas")
             .errorAlert(errorMessage: $viewModel.errorMessage)
         }
     }

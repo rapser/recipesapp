@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		460AB2252D5AFC980028BA23 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 460AB2242D5AFC980028BA23 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		46EEE0B32D56E69C00C22B47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				460AB2252D5AFC980028BA23 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = RecipeApp;
 			packageProductDependencies = (
+				460AB2242D5AFC980028BA23 /* Kingfisher */,
 			);
 			productName = RecipeApp;
 			productReference = 46EEE0A22D56E69900C22B47 /* RecipeApp.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 46EEE0992D56E69900C22B47;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				460AB2232D5AFC980028BA23 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 46EEE0A32D56E69900C22B47 /* Products */;
 			projectDirPath = "";
@@ -560,6 +569,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		460AB2232D5AFC980028BA23 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		460AB2242D5AFC980028BA23 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 460AB2232D5AFC980028BA23 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 46EEE09A2D56E69900C22B47 /* Project object */;
 }

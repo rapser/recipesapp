@@ -11,7 +11,7 @@ struct SearchBarView: View {
     @Binding var searchText: String
     
     var body: some View {
-        TextField("Search", text: $searchText)
+        TextField("Busqueda", text: $searchText)
             .textFieldStyle(.roundedBorder)
             .padding(.horizontal)
             .padding(.vertical, 8)
