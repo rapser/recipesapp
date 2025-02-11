@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct NavigationFactory {
-    static func view(for route: AppRoute, coordinator: AppCoordinator) -> AnyView {
-        switch route {
-        case .dishDetail(let dish):
-            return AnyView(DetailView(dish: dish)
-                .environmentObject(coordinator))
-        case .map(let dish):
-            return AnyView(MapView(dish: dish)
-                .environmentObject(coordinator))
-        default:
-            return AnyView(EmptyView())
+    static func view(for route: AppRoute, dependencies: AppDependencies) -> some View {
+        Group {
+            switch route {
+            case .home:
+                HomeView(viewModel: dependencies.homeViewModel)
+            case .dishDetail(let dish):
+                DetailView(viewModel: dependencies.makeDetailViewModel(dish: dish))
+            case .map(let dish):
+                MapView(viewModel: dependencies.makeMapViewModel(dish: dish))
+            }
         }
     }
 }

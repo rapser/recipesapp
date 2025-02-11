@@ -14,19 +14,3 @@ protocol Coordinator: ObservableObject {
     func pop()
     func popToRoot()
 }
-
-extension Coordinator {
-    func push(_ route: Route) {
-        navigationPath.append(route)
-    }
-    
-    func pop() {
-        if !navigationPath.isEmpty {
-            navigationPath.removeLast()
-        }
-    }
-    
-    func popToRoot() {
-        navigationPath.removeAll()
-    }
-}

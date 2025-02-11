@@ -8,47 +8,46 @@
 import SwiftUI
 import Combine
 
-class MockDishesRepository: DishesRepositoryProtocol {
-    
-    // Configuración de mock
-    var mockResponse: DishesResponse?
-    var mockError: Error?
-    var fetchCallCount = 0
-    
+final class MockDishesRepository: DishesRepositoryProtocol {
+    var mockDishesResponse: DishesResponse? = DishesResponse(dishes: Dish.mockDishes)
+    var error: Error?
+
     func fetchDishes() -> AnyPublisher<DishesResponse, Error> {
-        fetchCallCount += 1
-        
-        if let error = mockError {
-            return Fail(error: error)
-                .eraseToAnyPublisher()
+        if let error = error {
+            return Fail(error: error).eraseToAnyPublisher()
         }
         
-        return Just(mockResponse ?? .mockDishes)
+        guard let response = mockDishesResponse else {
+            return Fail(error: URLError(.badServerResponse))
+                .eraseToAnyPublisher()
+        }
+
+        return Just(response)
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
     }
 }
 
 // MARK: - Datos de prueba
-extension DishesResponse {
-    static let mockDishes = DishesResponse(
-        dishes: [
-            Dish(
-                name: "Mock Pasta",
-                photo: "https://example.com/mock-pasta.jpg",
-                description: "Mock pasta description",
-                ingredients: ["Pasta", "Tomato"],
-                origin: "Mock Italy",
-                location: Location(lat: 41.8919, lng: 12.5113)
-            ),
-            Dish(
-                name: "Mock Sushi",
-                photo: "https://example.com/mock-sushi.jpg",
-                description: "Mock sushi description",
-                ingredients: ["Rice", "Fish"],
-                origin: "Mock Japan",
-                location: Location(lat: 35.6895, lng: 139.6917)
-            )
-        ]
-    )
+extension Dish {
+    static let mockDishes: [Dish] = [
+        Dish(
+            id: UUID(),
+            name: "Pizza Margherita",
+            photo: "https://ejemplo.com/pizza.jpg",
+            description: "Clásica pizza italiana",
+            ingredients: ["Harina", "Tomate", "Mozzarella"],
+            origin: "Italia",
+            location: DishLocation(lat: 41.9028, lng: 12.4964)
+        ),
+        Dish(
+            id: UUID(),
+            name: "Sushi Roll",
+            photo: "https://ejemplo.com/sushi.jpg",
+            description: "Sushi tradicional japonés",
+            ingredients: ["Arroz", "Salmón", "Alga Nori"],
+            origin: "Japón",
+            location: DishLocation(lat: 35.6895, lng: 139.6917)
+        )
+    ]
 }

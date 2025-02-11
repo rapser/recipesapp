@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-struct DetailView: View {
-    let dish: Dish
-    @EnvironmentObject private var coordinator: AppCoordinator
+struct DetailView: View {    
+    @ObservedObject var viewModel: DetailViewModel
 
     var body: some View {
         VStack {
@@ -17,7 +16,7 @@ struct DetailView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     
                     // 📸 Imagen centrada
-                    AsyncImage(url: URL(string: dish.photo)) { phase in
+                    AsyncImage(url: URL(string: viewModel.dish.photo)) { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
@@ -40,13 +39,13 @@ struct DetailView: View {
                     .padding(.horizontal)
                     
                     // 📌 Nombre del plato
-                    Text(dish.name)
+                    Text(viewModel.dish.name)
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.horizontal)
                     
                     // 📝 Descripción justificada
-                    Text(dish.description)
+                    Text(viewModel.dish.description)
                         .font(.body)
                         .padding(.horizontal)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -59,7 +58,7 @@ struct DetailView: View {
                     
                     ScrollView {
                         VStack(alignment: .leading, spacing: 8) {
-                            ForEach(dish.ingredients, id: \.self) { ingredient in
+                            ForEach(viewModel.dish.ingredients, id: \.self) { ingredient in
                                 Text("• \(ingredient)")
                                     .font(.body)
                             }
@@ -72,7 +71,7 @@ struct DetailView: View {
             
             // 📍 Botón que usa el `coordinator` para abrir el mapa
             Button(action: {
-                coordinator.push(.map(dish))
+                viewModel.navigateToMap()
             }) {
                 Text("View on Map")
                     .frame(maxWidth: .infinity)
@@ -84,26 +83,14 @@ struct DetailView: View {
             .padding()
             .padding(.bottom, 10)
         }
-        .navigationTitle(dish.name)
+        .navigationTitle(viewModel.dish.name)
         .edgesIgnoringSafeArea(.bottom)
     }
 }
 
 
 #Preview {
-    let dish = Dish(
-        name: "Sopa a la minuta",
-        photo: "https://www.recetasnestle.com.pe/sites/default/files/styles/recipe_detail_desktop_new/public/srh_recipes/78e3eee085a9685a8ddf003539dade14.webp?itok=NN5Zl_8v",
-        description: "Aderezar la cebolla en aceite, colocar a hervir todo",
-        ingredients: ["sopa", "papa", "camote", "yuca"],
-        origin: "San Francisco, CA",
-        location: Location(lat: 37.7749, lng: -122.4194)
-    )
-    
-    let coordinator = AppCoordinator() // ✅ Crear instancia del coordinador
-
-    return DetailView(dish: dish)
-        .environmentObject(coordinator) // ✅ Inyectarlo correctamente
+    DetailView(viewModel: .preview())
+        .environmentObject(AppCoordinator())
 }
-
 

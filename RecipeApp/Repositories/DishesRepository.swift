@@ -12,15 +12,15 @@ protocol DishesRepositoryProtocol {
     func fetchDishes() -> AnyPublisher<DishesResponse, Error>
 }
 
-class DishesRepository: DishesRepositoryProtocol {
-    
+final class DishesRepository: DishesRepositoryProtocol {
     private let service: APIServiceProtocol
     
     init(service: APIServiceProtocol = APIService()) {
         self.service = service
     }
-        
+    
     func fetchDishes() -> AnyPublisher<DishesResponse, Error> {
+        // El servicio decodifica directamente a DishesResponse
         return service.request(endpoint: "recipes", method: .GET, body: nil, headers: nil)
             .eraseToAnyPublisher()
     }

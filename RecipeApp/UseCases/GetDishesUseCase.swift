@@ -7,14 +7,24 @@
 
 import Combine
 
-class GetDishesUseCase {
+protocol GetDishesUseCaseProtocol {
+    func execute() -> AnyPublisher<[Dish], Error>
+}
+
+final class GetDishesUseCase: GetDishesUseCaseProtocol {
     private let repository: DishesRepositoryProtocol
     
     init(repository: DishesRepositoryProtocol) {
         self.repository = repository
     }
     
-    func execute() -> AnyPublisher<DishesResponse, Error> {
+    func execute() -> AnyPublisher<[Dish], Error> {
         return repository.fetchDishes()
+            .map { $0.dishes } // Convertimos DishesResponse a [Dish]
+            .catch { error -> AnyPublisher<[Dish], Error> in
+                print("Error fetching dishes: \(error.localizedDescription)")
+                return Fail(error: error).eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
     }
 }

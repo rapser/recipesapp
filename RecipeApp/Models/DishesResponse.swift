@@ -18,7 +18,7 @@ struct Dish: Codable, Identifiable, Hashable {
     let description: String
     let ingredients: [String]
     let origin: String
-    let location: Location
+    let location: DishLocation
     
     // Hashable permite comparar estructuras fácilmente
     static func == (lhs: Dish, rhs: Dish) -> Bool {
@@ -32,25 +32,4 @@ struct Dish: Codable, Identifiable, Hashable {
     private enum CodingKeys: String, CodingKey {
         case name, photo, description, ingredients, origin, location
     }
-}
-
-extension Dish {
-    static let mockDishes: [Dish] = [
-        Dish(
-            name: "Test Dish",
-            photo: "https://example.com/test.jpg",
-            description: "Test description",
-            ingredients: ["Ing1", "Ing2"],
-            origin: "Testland",
-            location: Location(lat: 0, lng: 0)
-        ),
-        Dish(
-            name: "Test Dish",
-            photo: "https://example.com/test.jpg",
-            description: "Test description",
-            ingredients: ["Ing1", "Ing2"],
-            origin: "Testland",
-            location: Location(lat: 0, lng: 0)
-        )
-    ]
 }

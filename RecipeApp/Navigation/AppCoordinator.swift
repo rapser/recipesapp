@@ -7,10 +7,21 @@
 
 import SwiftUI
 
-final class AppCoordinator: Coordinator {
+final class AppCoordinator: ObservableObject, Coordinator {
     @Published var navigationPath: [AppRoute] = []
+    weak var dependencies: AppDependencies?
     
-    // Inyección de dependencias comunes
-    let dishesRepository = DishesRepository()
+    func push(_ route: AppRoute) {
+        navigationPath.append(route)
+    }
+    
+    func pop() {
+        if !navigationPath.isEmpty {
+            navigationPath.removeLast()
+        }
+    }
+    
+    func popToRoot() {
+        navigationPath.removeAll()
+    }
 }
-

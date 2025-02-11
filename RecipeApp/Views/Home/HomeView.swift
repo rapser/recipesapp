@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var viewModel = DishesViewModel(getDishesUseCase: GetDishesUseCase(repository: DishesRepository()))
-    
-    @EnvironmentObject private var coordinator: AppCoordinator
+    @ObservedObject var viewModel: HomeViewModel
 
     var body: some View {
         NavigationStack {
@@ -20,21 +18,17 @@ struct HomeView: View {
                 DishesListView(
                     dishes: viewModel.filteredDishes,
                     onDishSelected: { dish in
-                        coordinator.push(.dishDetail(dish))
+                        viewModel.navigateToDetail(dish: dish)
                     }
                 )
             }
             .navigationTitle("Recipes")
+            .errorAlert(errorMessage: $viewModel.errorMessage)
         }
     }
 }
 
 #Preview {
-    let mockRepository = MockDishesRepository()
-    let useCase = GetDishesUseCase(repository: mockRepository)
-    let viewModel = DishesViewModel(getDishesUseCase: useCase)
-    viewModel.dishes = Dish.mockDishes
-    
-    return HomeView(viewModel: viewModel)
+    HomeView(viewModel: .preview())
         .environmentObject(AppCoordinator())
 }

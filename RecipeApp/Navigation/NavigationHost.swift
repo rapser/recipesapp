@@ -7,16 +7,15 @@
 
 import SwiftUI
 
-struct NavigationHost<Route: Hashable, Content: View, Destination: View>: View {
-    @Binding var path: [Route]
-    let root: Content
-    let destinations: (Route) -> Destination
-
+struct NavigationHost: View {
+    @EnvironmentObject private var coordinator: AppCoordinator
+    @EnvironmentObject private var dependencies: AppDependencies
+    
     var body: some View {
-        NavigationStack(path: $path) {
-            root
-                .navigationDestination(for: Route.self) { route in
-                    destinations(route)
+        NavigationStack(path: $coordinator.navigationPath) {
+            NavigationFactory.view(for: .home, dependencies: dependencies)
+                .navigationDestination(for: AppRoute.self) { route in
+                    NavigationFactory.view(for: route, dependencies: dependencies)
                 }
         }
     }
