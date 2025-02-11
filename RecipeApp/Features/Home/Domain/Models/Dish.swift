@@ -1,15 +1,11 @@
 //
-//  Untitled.swift
+//  Dish.swift
 //  RecipeApp
 //
-//  Created by miguel tomairo on 7/02/25.
+//  Created by miguel tomairo on 10/02/25.
 //
 
 import Foundation
-
-struct DishesResponse: Codable {
-    let dishes: [Dish]
-}
 
 struct Dish: Codable, Identifiable, Hashable {
     var id = UUID()
