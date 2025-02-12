@@ -17,7 +17,6 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:RecipeApp.xcodeproj",
         "identifier" : "46EEE0B12D56E69C00C22B47",
