@@ -51,12 +51,12 @@
 				Data/Services/APIServiceProtocol.swift,
 				Data/Services/MockAPIService.swift,
 				Features/Detail/Presentation/ViewModels/DetailViewModel.swift,
-				Features/Home/Domain/Mocks/MockDish.swift,
-				Features/Home/Domain/Mocks/MockGetDishesUseCase.swift,
 				Features/Home/Domain/Models/Dish.swift,
 				Features/Home/Domain/Models/DishLocation.swift,
+				Features/Home/Domain/Models/Mocks/MockDish.swift,
 				Features/Home/Domain/UseCases/GetDishesUseCase.swift,
 				Features/Home/Domain/UseCases/GetDishesUseCaseProtocol.swift,
+				Features/Home/Domain/UseCases/Mocks/MockGetDishesUseCase.swift,
 				Features/Home/Presentation/ViewModels/HomeViewModel.swift,
 				Features/Map/Presentation/ViewModels/MapViewModel.swift,
 				Utilities/HTTPMethod.swift,
@@ -479,8 +479,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,8 +508,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
