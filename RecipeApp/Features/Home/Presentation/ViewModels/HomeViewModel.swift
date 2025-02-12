@@ -14,6 +14,7 @@ final class HomeViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var errorMessage: String?
     @Published var filteredDishes: [Dish] = []
+    @Published var isLoading: Bool = true
     
     // MARK: - Combine
     private var cancellables = Set<AnyCancellable>()
@@ -44,19 +45,16 @@ final class HomeViewModel: ObservableObject {
     private func filterDishes(text: String, dishes: [Dish]) -> [Dish] {
         guard !text.isEmpty else { return dishes }
         
-        // Paso 1: Elimina caracteres especiales y espacios
         let cleanedSearchText = text
             .trimmingCharacters(in: .whitespaces)
-            .components(separatedBy: .alphanumerics.inverted) // <- Elimina caracteres no alfanuméricos
+            .components(separatedBy: .alphanumerics.inverted)
             .joined()
         
-        // Paso 2: Normaliza diacríticos y convierte a minúsculas
         let normalizedSearchText = cleanedSearchText
             .applyingTransform(.stripDiacritics, reverse: false)?
             .lowercased() ?? cleanedSearchText.lowercased()
         
         return dishes.filter { dish in
-            // Normaliza el nombre del plato
             let normalizedDishName = dish.name
                 .applyingTransform(.stripDiacritics, reverse: false)?
                 .lowercased() ?? dish.name.lowercased()
@@ -72,14 +70,17 @@ final class HomeViewModel: ObservableObject {
     }
     
     private func loadDishes() {
+        isLoading = true // <- Activar Skeleton
         getDishesUseCase.execute()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 if case .failure(let error) = completion {
                     self?.errorMessage = error.localizedDescription
                 }
+                self?.isLoading = false // <- Desactivar Skeleton en caso de error
             } receiveValue: { [weak self] dishes in
                 self?.dishes = dishes
+                self?.isLoading = false // <- Desactivar Skeleton cuando se cargan los datos
             }
             .store(in: &cancellables)
     }
