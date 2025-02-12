@@ -28,19 +28,63 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		460AB26D2D5BF45C0028BA23 /* RecipeApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RecipeApp.xctestplan; sourceTree = "<group>"; };
 		46EEE0A22D56E69900C22B47 /* RecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EEE0B22D56E69C00C22B47 /* RecipeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EEE0BC2D56E69D00C22B47 /* RecipeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		460AB2422D5BBEDB0028BA23 /* Exceptions for "RecipeApp" folder in "RecipeAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Core/DI/AppDependencies.swift,
+				Core/DI/MockAppDependencies.swift,
+				Core/Navigation/AppCoordinator.swift,
+				Core/Navigation/AppRoute.swift,
+				Core/Navigation/Coordinator.swift,
+				Data/Models/DishesResponse.swift,
+				Data/Repositories/DishesRepository.swift,
+				Data/Repositories/Mocks/MockDishesRepository.swift,
+				Data/Services/APIService.swift,
+				Data/Services/APIServiceProtocol.swift,
+				Data/Services/MockAPIService.swift,
+				Features/Detail/Presentation/ViewModels/DetailViewModel.swift,
+				Features/Home/Domain/Mocks/MockDish.swift,
+				Features/Home/Domain/Mocks/MockGetDishesUseCase.swift,
+				Features/Home/Domain/Models/Dish.swift,
+				Features/Home/Domain/Models/DishLocation.swift,
+				Features/Home/Domain/UseCases/GetDishesUseCase.swift,
+				Features/Home/Domain/UseCases/GetDishesUseCaseProtocol.swift,
+				Features/Home/Presentation/ViewModels/HomeViewModel.swift,
+				Features/Map/Presentation/ViewModels/MapViewModel.swift,
+				Utilities/HTTPMethod.swift,
+			);
+			target = 46EEE0B12D56E69C00C22B47 /* RecipeAppTests */;
+		};
+		460AB2602D5BDB2B0028BA23 /* Exceptions for "RecipeAppTests" folder in "RecipeAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				RecipeAppTests.swift,
+			);
+			target = 46EEE0B12D56E69C00C22B47 /* RecipeAppTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		46EEE0A42D56E69900C22B47 /* RecipeApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				460AB2422D5BBEDB0028BA23 /* Exceptions for "RecipeApp" folder in "RecipeAppTests" target */,
+			);
 			path = RecipeApp;
 			sourceTree = "<group>";
 		};
 		46EEE0B52D56E69C00C22B47 /* RecipeAppTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				460AB2602D5BDB2B0028BA23 /* Exceptions for "RecipeAppTests" folder in "RecipeAppTests" target */,
+			);
 			path = RecipeAppTests;
 			sourceTree = "<group>";
 		};
@@ -80,6 +124,7 @@
 		46EEE0992D56E69900C22B47 = {
 			isa = PBXGroup;
 			children = (
+				460AB26D2D5BF45C0028BA23 /* RecipeApp.xctestplan */,
 				46EEE0A42D56E69900C22B47 /* RecipeApp */,
 				46EEE0B52D56E69C00C22B47 /* RecipeAppTests */,
 				46EEE0BF2D56E69D00C22B47 /* RecipeAppUITests */,

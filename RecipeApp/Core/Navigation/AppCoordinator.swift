@@ -9,7 +9,11 @@ import SwiftUI
 
 final class AppCoordinator: ObservableObject, Coordinator {
     @Published var navigationPath: [AppRoute] = []
-    weak var dependencies: AppDependencies?
+    private weak var dependencies: AppDependenciesProtocol?
+    
+    init(dependencies: AppDependenciesProtocol) {
+        self.dependencies = dependencies
+    }
     
     func push(_ route: AppRoute) {
         navigationPath.append(route)

@@ -13,18 +13,11 @@ struct DetailView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            // 📸 Imagen del plato
+            
             DishImageView(photoURL: viewModel.dish.photo)
-
-            // 📝 Descripción del plato
             DishDescriptionView(description: viewModel.dish.description)
-
-            // 🛒 Lista de ingredientes
             IngredientsListView(ingredients: viewModel.dish.ingredients)
-
             Spacer() // Asegura que el botón quede siempre abajo
-
-            // 📍 Botón "Ver en Mapa"
             MapViewButton {
                 viewModel.navigateToMap()
             }
@@ -35,7 +28,7 @@ struct DetailView: View {
 }
 
 #Preview {
-    DetailView(viewModel: .preview())
-        .environmentObject(AppCoordinator())
+//    DetailView(viewModel: .preview())
+//        .environmentObject(AppCoordinator())
 }
 

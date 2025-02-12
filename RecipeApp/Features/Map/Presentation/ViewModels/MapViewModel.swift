@@ -9,8 +9,6 @@ import Combine
 import SwiftUI
 import MapKit
 
-import MapKit
-
 final class MapViewModel: ObservableObject {
     let dish: Dish
     @Published var position: MapCameraPosition

@@ -8,22 +8,36 @@
 import SwiftUI
 import Combine
 
-final class MockDishesRepository: DishesRepositoryProtocol {
-    var mockDishesResponse: DishesResponse? = DishesResponse(dishes: Dish.mockDishes)
-    var error: Error?
+//final class MockDishesRepository: DishesRepositoryProtocol {
+//    var mockDishesResponse: DishesResponse? = DishesResponse(dishes: Dish.mockDishes)
+//    var error: Error?
+//
+//    func fetchDishes() -> AnyPublisher<DishesResponse, Error> {
+//        if let error = error {
+//            return Fail(error: error).eraseToAnyPublisher()
+//        }
+//        
+//        guard let response = mockDishesResponse else {
+//            return Fail(error: URLError(.badServerResponse))
+//                .eraseToAnyPublisher()
+//        }
+//
+//        return Just(response)
+//            .setFailureType(to: Error.self)
+//            .eraseToAnyPublisher()
+//    }
+//}
 
+class MockDishesRepository: DishesRepositoryProtocol {
+    private let result: Result<DishesResponse, Error>
+    
+    // Acepta un Result<DishesResponse, Error>
+    init(result: Result<DishesResponse, Error>) {
+        self.result = result
+    }
+    
     func fetchDishes() -> AnyPublisher<DishesResponse, Error> {
-        if let error = error {
-            return Fail(error: error).eraseToAnyPublisher()
-        }
-        
-        guard let response = mockDishesResponse else {
-            return Fail(error: URLError(.badServerResponse))
-                .eraseToAnyPublisher()
-        }
-
-        return Just(response)
-            .setFailureType(to: Error.self)
+        result.publisher
             .eraseToAnyPublisher()
     }
 }

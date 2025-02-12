@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct NavigationFactory {
-    static func view(for route: AppRoute, dependencies: AppDependencies) -> some View {
+    static func view(for route: AppRoute, dependencies: AppDependenciesProtocol) -> some View {
         Group {
             switch route {
             case .home:
-                HomeView(viewModel: dependencies.homeViewModel)
+                HomeView(viewModel: dependencies.makeHomeViewModel())
             case .dishDetail(let dish):
                 DetailView(viewModel: dependencies.makeDetailViewModel(dish: dish))
             case .map(let dish):

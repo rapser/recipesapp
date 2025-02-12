@@ -8,24 +8,21 @@
 import Foundation
 
 extension HomeViewModel {
-    static func preview() -> HomeViewModel {
-        let mockRepository = MockDishesRepository()
-        let mockUseCase = GetDishesUseCase(repository: mockRepository)
-        let mockCoordinator = AppCoordinator()
-
-        let viewModel = HomeViewModel(
-            getDishesUseCase: mockUseCase,
-            coordinator: mockCoordinator
-        )
-
-        // Configurar datos mock
-        let mockDishes = Dish.mockDishes
-        mockRepository.mockDishesResponse = DishesResponse(dishes: mockDishes)
-
-        // ⚡️ Forzar actualización manual de `dishes`
-        viewModel.dishes = mockDishes
-        viewModel.errorMessage = nil
-
-        return viewModel
-    }
+//    static func preview() -> HomeViewModel {
+//        let mockDishes = Dish.mockDishes
+//        let mockResponse = DishesResponse(dishes: mockDishes)
+//        let mockRepository = MockDishesRepository(result: .success(mockResponse))
+//        let mockUseCase = GetDishesUseCase(repository: mockRepository)
+//        let mockCoordinator = AppCoordinator()
+//
+//        let viewModel = HomeViewModel(
+//            getDishesUseCase: mockUseCase,
+//            coordinator: mockCoordinator
+//        )
+//        // ⚡️ Forzar actualización manual de `dishes`
+//        viewModel.dishes = mockDishes
+//        viewModel.errorMessage = nil
+//
+//        return viewModel
+//    }
 }

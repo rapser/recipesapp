@@ -44,10 +44,30 @@ final class HomeViewModel: ObservableObject {
     private func filterDishes(text: String, dishes: [Dish]) -> [Dish] {
         guard !text.isEmpty else { return dishes }
         
-        let lowercasedText = text.lowercased()
-        return dishes.filter {
-            $0.name.lowercased().contains(lowercasedText) ||
-            $0.ingredients.contains { $0.lowercased().contains(lowercasedText) }
+        // Paso 1: Elimina caracteres especiales y espacios
+        let cleanedSearchText = text
+            .trimmingCharacters(in: .whitespaces)
+            .components(separatedBy: .alphanumerics.inverted) // <- Elimina caracteres no alfanuméricos
+            .joined()
+        
+        // Paso 2: Normaliza diacríticos y convierte a minúsculas
+        let normalizedSearchText = cleanedSearchText
+            .applyingTransform(.stripDiacritics, reverse: false)?
+            .lowercased() ?? cleanedSearchText.lowercased()
+        
+        return dishes.filter { dish in
+            // Normaliza el nombre del plato
+            let normalizedDishName = dish.name
+                .applyingTransform(.stripDiacritics, reverse: false)?
+                .lowercased() ?? dish.name.lowercased()
+            
+            return normalizedDishName.contains(normalizedSearchText) ||
+            dish.ingredients.contains { ingredient in
+                let normalizedIngredient = ingredient
+                    .applyingTransform(.stripDiacritics, reverse: false)?
+                    .lowercased() ?? ingredient.lowercased()
+                return normalizedIngredient.contains(normalizedSearchText)
+            }
         }
     }
     

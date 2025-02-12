@@ -7,10 +7,6 @@
 
 import Combine
 
-protocol GetDishesUseCaseProtocol {
-    func execute() -> AnyPublisher<[Dish], Error>
-}
-
 final class GetDishesUseCase: GetDishesUseCaseProtocol {
     private let repository: DishesRepositoryProtocol
     

@@ -13,10 +13,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // Barra de búsqueda
                 SearchBarView(searchText: $viewModel.searchText)
-                
-                // Lista de platos
                 DishesListView(viewModel: viewModel)
             }
             .navigationTitle("Recetas")
@@ -26,6 +23,6 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(viewModel: .preview())
-        .environmentObject(AppCoordinator())
+//    HomeView(viewModel: .preview())
+//        .environmentObject(AppCoordinator())
 }
