@@ -40,6 +40,7 @@
 			membershipExceptions = (
 				Core/DI/AppDependencies.swift,
 				Core/DI/MockAppDependencies.swift,
+				Core/DI/PreviewDependencies.swift,
 				Core/Navigation/AppCoordinator.swift,
 				Core/Navigation/AppRoute.swift,
 				Core/Navigation/Coordinator.swift,

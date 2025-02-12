@@ -17,7 +17,7 @@ struct DetailView: View {
             DishImageView(photoURL: viewModel.dish.photo)
             DishDescriptionView(description: viewModel.dish.description)
             IngredientsListView(ingredients: viewModel.dish.ingredients)
-            Spacer() // Asegura que el botón quede siempre abajo
+            Spacer()
             MapViewButton {
                 viewModel.navigateToMap()
             }
@@ -28,7 +28,6 @@ struct DetailView: View {
 }
 
 #Preview {
-//    DetailView(viewModel: .preview())
-//        .environmentObject(AppCoordinator())
+    DetailView(viewModel: .preview())
 }
 

@@ -8,26 +8,6 @@
 import SwiftUI
 import Combine
 
-//final class MockDishesRepository: DishesRepositoryProtocol {
-//    var mockDishesResponse: DishesResponse? = DishesResponse(dishes: Dish.mockDishes)
-//    var error: Error?
-//
-//    func fetchDishes() -> AnyPublisher<DishesResponse, Error> {
-//        if let error = error {
-//            return Fail(error: error).eraseToAnyPublisher()
-//        }
-//        
-//        guard let response = mockDishesResponse else {
-//            return Fail(error: URLError(.badServerResponse))
-//                .eraseToAnyPublisher()
-//        }
-//
-//        return Just(response)
-//            .setFailureType(to: Error.self)
-//            .eraseToAnyPublisher()
-//    }
-//}
-
 class MockDishesRepository: DishesRepositoryProtocol {
     private let result: Result<DishesResponse, Error>
     
@@ -47,21 +27,21 @@ extension Dish {
     static let mockDishes: [Dish] = [
         Dish(
             id: UUID(),
-            name: "Pizza Margherita",
-            photo: "https://ejemplo.com/pizza.jpg",
-            description: "Clásica pizza italiana",
-            ingredients: ["Harina", "Tomate", "Mozzarella"],
+            name: "Fettuccine Alfredo",
+            photo: "https://images.aws.nestle.recipes/resized/cc72869fabfc2bdfa036fd1fe0e2bad8_creamy_alfredo_pasta_long_left_1080_850.jpg",
+            description: "Pasta italiana con salsa cremosa de queso y mantequilla",
+            ingredients: ["Fettuccine", "Mantequilla", "Queso Parmesano", "Crema"],
             origin: "Italia",
             location: DishLocation(lat: 41.9028, lng: 12.4964)
         ),
         Dish(
             id: UUID(),
-            name: "Sushi Roll",
-            photo: "https://ejemplo.com/sushi.jpg",
-            description: "Sushi tradicional japonés",
-            ingredients: ["Arroz", "Salmón", "Alga Nori"],
-            origin: "Japón",
-            location: DishLocation(lat: 35.6895, lng: 139.6917)
+            name: "Sopa Shambar",
+            photo: "https://blog.amigofoods.com/wp-content/uploads/2023/04/shambar-peruvian-soup.jpg",
+            description: "Tradicional sopa trujillana con menestras y carnes",
+            ingredients: ["Trigo", "Frijoles", "Carne de cerdo", "Culantro"],
+            origin: "Perú",
+            location: DishLocation(lat: -8.11599, lng: -79.02998) // Trujillo, Perú
         )
     ]
 }

@@ -30,7 +30,6 @@ struct MapView: View {
 }
 
 #Preview {
-//    MapView(viewModel: .preview())
-//        .environmentObject(AppCoordinator())
+    MapView(viewModel: .preview())
 }
 

@@ -9,77 +9,82 @@ import XCTest
 
 final class AppCoordinatorTests: XCTestCase {
     
-    // ✅ Caso de éxito: Navegar a una ruta agrega correctamente la ruta al navigationPath
+    // MARK: - Navegación
+
     func testPushRoute() {
-//        let coordinator = AppCoordinator()
+        // Arrange
         let mockDependencies = MockAppDependencies()
         let coordinator = AppCoordinator(dependencies: mockDependencies)
+        
+        // Act
         coordinator.push(.home)
         
+        // Assert
         XCTAssertEqual(coordinator.navigationPath.count, 1)
         XCTAssertEqual(coordinator.navigationPath.first, .home)
     }
     
-    // ✅ Caso de éxito: popToRoot elimina todas las rutas, volviendo al estado inicial
     func testPopToRoot() {
-//        let coordinator = AppCoordinator()
+        // Arrange
         let mockDependencies = MockAppDependencies()
         let coordinator = AppCoordinator(dependencies: mockDependencies)
-
         let mockDish = Dish.mock()
         
         coordinator.push(.home)
         coordinator.push(.dishDetail(mockDish))
+        
+        // Act
         coordinator.popToRoot()
         
+        // Assert
         XCTAssertTrue(coordinator.navigationPath.isEmpty)
     }
     
-    // ✅ Caso de éxito: push múltiples veces agrega rutas en orden correcto
     func testPushMultipleRoutes() {
-//        let coordinator = AppCoordinator()
+        // Arrange
         let mockDependencies = MockAppDependencies()
         let coordinator = AppCoordinator(dependencies: mockDependencies)
-
         let mockDish = Dish.mock()
         
+        // Act
         coordinator.push(.home)
         coordinator.push(.dishDetail(mockDish))
         coordinator.push(.map(mockDish))
         
+        // Assert
         XCTAssertEqual(coordinator.navigationPath.count, 3)
         XCTAssertEqual(coordinator.navigationPath[0], .home)
         XCTAssertEqual(coordinator.navigationPath[1], .dishDetail(mockDish))
         XCTAssertEqual(coordinator.navigationPath[2], .map(mockDish))
     }
     
-    // ✅ Caso de éxito: pop elimina solo la última ruta agregada
     func testPopRoute() {
-//        let coordinator = AppCoordinator()
+        // Arrange
         let mockDependencies = MockAppDependencies()
         let coordinator = AppCoordinator(dependencies: mockDependencies)
-
         let mockDish = Dish.mock()
         
         coordinator.push(.home)
         coordinator.push(.dishDetail(mockDish))
         
+        // Act
         coordinator.pop()
         
+        // Assert
         XCTAssertEqual(coordinator.navigationPath.count, 1)
         XCTAssertEqual(coordinator.navigationPath.first, .home)
     }
     
-    // ⚠️ Caso borde: pop en un navigationPath vacío no debe fallar ni modificar el estado
     func testPopOnEmptyNavigationPath() {
-//        let coordinator = AppCoordinator()
+        // Arrange
         let mockDependencies = MockAppDependencies()
         let coordinator = AppCoordinator(dependencies: mockDependencies)
         
+        // Act
         coordinator.pop()
         
+        // Assert
         XCTAssertTrue(coordinator.navigationPath.isEmpty, "pop() en una lista vacía no debe modificar el estado")
     }
-    
 }
 

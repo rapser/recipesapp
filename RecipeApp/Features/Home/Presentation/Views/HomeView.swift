@@ -22,7 +22,6 @@ struct HomeView: View {
     }
 }
 
-#Preview {
-//    HomeView(viewModel: .preview())
-//        .environmentObject(AppCoordinator())
+#Preview {        
+    HomeView(viewModel: .preview())
 }
