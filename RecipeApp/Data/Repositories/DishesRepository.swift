@@ -8,10 +8,6 @@
 import Combine
 import SwiftUI
 
-protocol DishesRepositoryProtocol {
-    func fetchDishes() -> AnyPublisher<DishesResponse, Error>
-}
-
 final class DishesRepository: DishesRepositoryProtocol {
     private let service: APIServiceProtocol
     

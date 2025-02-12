@@ -16,10 +16,10 @@ final class GetDishesUseCase: GetDishesUseCaseProtocol {
     
     func execute() -> AnyPublisher<[Dish], Error> {
         return repository.fetchDishes()
-            .map { $0.dishes } // Convertimos DishesResponse a [Dish]
-            .catch { error -> AnyPublisher<[Dish], Error> in
-                print("Error fetching dishes: \(error.localizedDescription)")
-                return Fail(error: error).eraseToAnyPublisher()
+            .map(\.dishes)
+            .mapError { error -> Error in
+                print("UseCase Error: \(error.localizedDescription)")
+                return error
             }
             .eraseToAnyPublisher()
     }

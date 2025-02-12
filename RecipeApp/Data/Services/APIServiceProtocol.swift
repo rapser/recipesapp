@@ -9,5 +9,8 @@ import Foundation
 import Combine
 
 protocol APIServiceProtocol {
-    func request<T: Decodable>(endpoint: String, method: HTTPMethod, body: Data?, headers: [String: String]?) -> AnyPublisher<T, Error>
+    func request<T: Decodable>(endpoint: String,
+                               method: HTTPMethod,
+                               body: Data?,
+                               headers: [String: String]?) -> AnyPublisher<T, Error>
 }
