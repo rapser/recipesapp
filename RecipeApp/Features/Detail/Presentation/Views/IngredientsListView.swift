@@ -26,6 +26,6 @@ struct IngredientsListView: View {
                 }
             }
         }
-        .frame(maxHeight: .infinity) // Ocupa todo el espacio disponible
+        .frame(maxHeight: .infinity)
     }
 }

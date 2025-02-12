@@ -20,7 +20,6 @@ final class DishesRepository: DishesRepositoryProtocol {
     }
     
     func fetchDishes() -> AnyPublisher<DishesResponse, Error> {
-        // El servicio decodifica directamente a DishesResponse
         return service.request(endpoint: "recipes", method: .GET, body: nil, headers: nil)
             .eraseToAnyPublisher()
     }

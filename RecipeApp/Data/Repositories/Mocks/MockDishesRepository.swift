@@ -11,7 +11,6 @@ import Combine
 class MockDishesRepository: DishesRepositoryProtocol {
     private let result: Result<DishesResponse, Error>
     
-    // Acepta un Result<DishesResponse, Error>
     init(result: Result<DishesResponse, Error>) {
         self.result = result
     }

@@ -13,7 +13,6 @@ protocol AppDependenciesProtocol: AnyObject {
     func makeMapViewModel(dish: Dish) -> MapViewModel
 }
 
-// 2. AppDependencies corregido
 final class AppDependencies: AppDependenciesProtocol, ObservableObject {
     // MARK: - Dependencies
     private let service: APIService
@@ -27,8 +26,6 @@ final class AppDependencies: AppDependenciesProtocol, ObservableObject {
         self.service = service
         self.dishesRepository = DishesRepository(service: service)
         self.getDishesUseCase = GetDishesUseCase(repository: dishesRepository)
-        
-        // 2. Inicializa coordinator DESPUÉS de las demás propiedades
         self.coordinator = AppCoordinator(dependencies: self)
     }
     

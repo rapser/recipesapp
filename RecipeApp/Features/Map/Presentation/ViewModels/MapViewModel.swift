@@ -17,9 +17,7 @@ final class MapViewModel: ObservableObject {
     
     init(dish: Dish, coordinator: AppCoordinator) {
         self.dish = dish
-        self.coordinator = coordinator
-        
-        // Configurar posición inicial
+        self.coordinator = coordinator        
         self.position = .region(MKCoordinateRegion(
             center: CLLocationCoordinate2D(
                 latitude: dish.location.lat,

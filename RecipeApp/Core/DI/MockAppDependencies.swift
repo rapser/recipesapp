@@ -8,7 +8,6 @@
 import SwiftUI
 
 class MockAppDependencies: AppDependenciesProtocol {
-    // Implementaciones vacías o mock para métodos no usados en los tests
     func makeHomeViewModel() -> HomeViewModel {
         fatalError("No necesario para estos tests")
     }
