@@ -14,17 +14,21 @@ final class HomeViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var errorMessage: String?
     @Published var filteredDishes: [Dish] = []
-    @Published var isLoading: Bool = true
+    @Published private(set) var isLoading = false
     
     // MARK: - Combine
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Dependencies
     private let getDishesUseCase: GetDishesUseCaseProtocol
+    private let filterDishesUseCase: FilterDishesUseCaseProtocol
     private let coordinator: AppCoordinator
     
-    init(getDishesUseCase: GetDishesUseCaseProtocol, coordinator: AppCoordinator) {
+    init(getDishesUseCase: GetDishesUseCaseProtocol,
+         filterDishesUseCase: FilterDishesUseCaseProtocol,
+         coordinator: AppCoordinator) {
         self.getDishesUseCase = getDishesUseCase
+        self.filterDishesUseCase = filterDishesUseCase
         self.coordinator = coordinator
         setupBindings()
         loadDishes()
@@ -36,17 +40,16 @@ final class HomeViewModel: ObservableObject {
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .combineLatest($dishes)
-            .map { text, dishes in
-                self.filterDishes(text: text, dishes: dishes)
+            .map { [weak self] text, dishes in
+                self?.filterDishesUseCase.execute(text: text, dishes: dishes) ?? []
             }
             .receive(on: DispatchQueue.main)
             .assign(to: &$filteredDishes)
     }
     
     // MARK: - Data Handling
-    private func loadDishes() {
+    func loadDishes() {
         isLoading = true
-        
         getDishesUseCase.execute()
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveCompletion: { [weak self] _ in
@@ -74,40 +77,14 @@ final class HomeViewModel: ObservableObject {
         case let apiError as APIError:
             errorMessage = apiError.errorDescription ?? "Error desconocido en la API"
             debugPrint("API Error: \(apiError.localizedDescription)")
+        case let urlError as URLError:
+            errorMessage = "Error de conexión: \(urlError.localizedDescription)"
         default:
             errorMessage = "Error inesperado: \(error.localizedDescription)"
         }
 
         DispatchQueue.main.async { [weak self] in
             self?.errorMessage = errorMessage
-        }
-    }
-    
-    // MARK: - Search
-    private func filterDishes(text: String, dishes: [Dish]) -> [Dish] {
-        guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return dishes }
-
-        let cleanedSearchText = text
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .applyingTransform(.stripDiacritics, reverse: false)?
-            .lowercased() ?? text.lowercased()
-
-        return dishes.lazy.filter { dish in
-            let normalizedDishName = dish.name
-                .applyingTransform(.stripDiacritics, reverse: false)?
-                .lowercased() ?? dish.name.lowercased()
-
-            if normalizedDishName.contains(cleanedSearchText) {
-                return true
-            }
-
-            return dish.ingredients.contains { ingredient in
-                let normalizedIngredient = ingredient
-                    .applyingTransform(.stripDiacritics, reverse: false)?
-                    .lowercased() ?? ingredient.lowercased()
-                
-                return normalizedIngredient.contains(cleanedSearchText)
-            }
         }
     }
     

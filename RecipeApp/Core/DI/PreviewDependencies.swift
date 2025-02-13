@@ -11,8 +11,11 @@ final class PreviewDependencies: AppDependenciesProtocol {
     func makeHomeViewModel() -> HomeViewModel {
         let mockDishes = Dish.mockDishes
         let mockUseCase = MockGetDishesUseCase(result: .success(mockDishes))
+        let mockFilterUseCase = MockFilterDishesUseCase()
         let coordinator = AppCoordinator(dependencies: self)
-        return HomeViewModel(getDishesUseCase: mockUseCase, coordinator: coordinator)
+        return HomeViewModel(getDishesUseCase: mockUseCase,
+                             filterDishesUseCase: mockFilterUseCase,
+                             coordinator: coordinator)
     }
     
     func makeDetailViewModel(dish: Dish) -> DetailViewModel {

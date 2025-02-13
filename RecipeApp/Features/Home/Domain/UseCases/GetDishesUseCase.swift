@@ -18,7 +18,6 @@ final class GetDishesUseCase: GetDishesUseCaseProtocol {
         return repository.fetchDishes()
             .map(\.dishes)
             .mapError { error -> Error in
-                print("UseCase Error: \(error.localizedDescription)")
                 return error
             }
             .eraseToAnyPublisher()

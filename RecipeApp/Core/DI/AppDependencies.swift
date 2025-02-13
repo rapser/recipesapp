@@ -18,7 +18,8 @@ final class AppDependencies: AppDependenciesProtocol, ObservableObject {
     private let service: APIService
     private let dishesRepository: DishesRepositoryProtocol
     private let getDishesUseCase: GetDishesUseCaseProtocol
-    
+    private let filterDishesUseCase: FilterDishesUseCase
+
     // MARK: - Coordinator
     var coordinator: AppCoordinator!
     
@@ -26,6 +27,7 @@ final class AppDependencies: AppDependenciesProtocol, ObservableObject {
         self.service = service
         self.dishesRepository = DishesRepository(service: service)
         self.getDishesUseCase = GetDishesUseCase(repository: dishesRepository)
+        self.filterDishesUseCase = FilterDishesUseCase()
         self.coordinator = AppCoordinator(dependencies: self)
     }
     
@@ -33,6 +35,7 @@ final class AppDependencies: AppDependenciesProtocol, ObservableObject {
     func makeHomeViewModel() -> HomeViewModel {
         HomeViewModel(
             getDishesUseCase: getDishesUseCase,
+            filterDishesUseCase: filterDishesUseCase,
             coordinator: coordinator
         )
     }

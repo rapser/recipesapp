@@ -16,15 +16,6 @@ struct Dish: Codable, Identifiable, Hashable {
     let origin: String
     let location: DishLocation
     
-    // Hashable permite comparar estructuras fácilmente
-    static func == (lhs: Dish, rhs: Dish) -> Bool {
-        return lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
     private enum CodingKeys: String, CodingKey {
         case name, photo, description, ingredients, origin, location
     }

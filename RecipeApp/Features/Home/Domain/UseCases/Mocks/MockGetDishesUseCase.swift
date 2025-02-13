@@ -15,7 +15,6 @@ class MockGetDishesUseCase: GetDishesUseCaseProtocol {
     }
     
     func execute() -> AnyPublisher<[Dish], Error> {
-        result.publisher
-            .eraseToAnyPublisher()
+        result.publisher.eraseToAnyPublisher()
     }
 }
