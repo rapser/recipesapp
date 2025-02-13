@@ -13,6 +13,12 @@ Este proyecto es una aplicación iOS desarrollada con SwiftUI, siguiendo la arqu
 - **XCTest**: Para pruebas unitarias.
 - **Kingfisher**: Para la carga eficiente de imágenes.
 
+## Demostración de la Aplicación
+
+Puedes ver una demostración del funcionamiento de la aplicación en el siguiente video:
+
+![preview](https://github.com/user-attachments/assets/951a7800-c2d0-4ae2-8d80-81fbb93a8f40)
+
 ## Arquitectura
 
 El proyecto está basado en la arquitectura **MVVM Clean**, que separa claramente las responsabilidades de cada capa:
