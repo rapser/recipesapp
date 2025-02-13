@@ -8,6 +8,12 @@
 class MockFilterDishesUseCase: FilterDishesUseCaseProtocol {
     func execute(text: String, dishes: [Dish]) -> [Dish] {
         guard !text.isEmpty else { return dishes }
-        return dishes.filter { $0.name.lowercased().contains(text.lowercased()) }
+
+        let normalizedQuery = text.folding(options: .diacriticInsensitive, locale: .current).lowercased()
+
+        return dishes.filter { dish in
+            let normalizedDishName = dish.name.folding(options: .diacriticInsensitive, locale: .current).lowercased()
+            return normalizedDishName.contains(normalizedQuery)
+        }
     }
 }

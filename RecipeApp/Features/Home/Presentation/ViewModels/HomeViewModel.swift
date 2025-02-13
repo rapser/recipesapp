@@ -80,7 +80,7 @@ final class HomeViewModel: ObservableObject {
         case let urlError as URLError:
             errorMessage = "Error de conexión: \(urlError.localizedDescription)"
         default:
-            errorMessage = "Error inesperado: \(error.localizedDescription)"
+            errorMessage = error.localizedDescription
         }
 
         DispatchQueue.main.async { [weak self] in
