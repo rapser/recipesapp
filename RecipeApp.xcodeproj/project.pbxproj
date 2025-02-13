@@ -178,7 +178,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46EEE0C92D56E69D00C22B47 /* Build configuration list for PBXNativeTarget "RecipeAppTests" */;
 			buildPhases = (
-				46450F562D5D344B00A612AF /* Swiflint */,
 				46EEE0AE2D56E69C00C22B47 /* Sources */,
 				46EEE0AF2D56E69C00C22B47 /* Frameworks */,
 				46EEE0B02D56E69C00C22B47 /* Resources */,
@@ -291,27 +290,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		46450F562D5D344B00A612AF /* Swiflint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Swiflint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint > /dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint no está instalado, usa 'brew install swiftlint'\"\nfi\n\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		46EEE09E2D56E69900C22B47 /* Sources */ = {
