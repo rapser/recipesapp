@@ -19,7 +19,10 @@ final class HomeViewModelTests: XCTestCase {
             Dish.mock(name: "Pizza", ingredients: ["Cheese"])
         ]
         let mockUseCase = MockGetDishesUseCase(result: .success(mockDishes))
-        let viewModel = HomeViewModel(getDishesUseCase: mockUseCase, coordinator: makeCoordinator())
+        let mockFilterUseCase = MockFilterDishesUseCase()
+        let viewModel = HomeViewModel(getDishesUseCase: mockUseCase,
+                                      filterDishesUseCase: mockFilterUseCase,
+                                      coordinator: makeCoordinator())
         let expectation = XCTestExpectation(description: "Dishes loaded")
         
         // Act
@@ -40,7 +43,10 @@ final class HomeViewModelTests: XCTestCase {
         // Arrange
         let mockError = NSError(domain: "Test", code: 500, userInfo: [NSLocalizedDescriptionKey: "Error en la carga"])
         let mockUseCase = MockGetDishesUseCase(result: .failure(mockError))
-        let viewModel = HomeViewModel(getDishesUseCase: mockUseCase, coordinator: makeCoordinator())
+        let mockFilterUseCase = MockFilterDishesUseCase()
+        let viewModel = HomeViewModel(getDishesUseCase: mockUseCase,
+                                      filterDishesUseCase: mockFilterUseCase,
+                                      coordinator: makeCoordinator())
         let expectation = XCTestExpectation(description: "Error message set")
         
         // Act
@@ -63,7 +69,7 @@ final class HomeViewModelTests: XCTestCase {
             Dish.mock(name: "Pasta", ingredients: ["Tomato"]),
             Dish.mock(name: "Pizza", ingredients: ["Cheese"])
         ]
-        let viewModel = HomeViewModel(getDishesUseCase: MockGetDishesUseCase(result: .success(dishes)), coordinator: makeCoordinator())
+        let viewModel = HomeViewModel(getDishesUseCase: MockGetDishesUseCase(result: .success(dishes)), filterDishesUseCase: MockFilterDishesUseCase(), coordinator: makeCoordinator())
         waitForLoad()
         
         // Act
@@ -91,7 +97,7 @@ final class HomeViewModelTests: XCTestCase {
     func testSearchWithSpecialCharacters() {
         // Arrange
         let dishes = [Dish.mock(name: "Café"), Dish.mock(name: "Pizza"), Dish.mock(name: "Té Verde")]
-        let viewModel = HomeViewModel(getDishesUseCase: MockGetDishesUseCase(result: .success(dishes)), coordinator: makeCoordinator())
+        let viewModel = HomeViewModel(getDishesUseCase: MockGetDishesUseCase(result: .success(dishes)), filterDishesUseCase: <#any FilterDishesUseCaseProtocol#>, coordinator: makeCoordinator())
         waitForLoad()
         
         // Act
@@ -108,7 +114,10 @@ final class HomeViewModelTests: XCTestCase {
         // Arrange
         let mockError = NSError(domain: "Test", code: 999, userInfo: nil)
         let mockUseCase = MockGetDishesUseCase(result: .failure(mockError))
-        let viewModel = HomeViewModel(getDishesUseCase: mockUseCase, coordinator: makeCoordinator())
+        let mockFilterUseCase = MockFilterDishesUseCase()
+        let viewModel = HomeViewModel(getDishesUseCase: mockUseCase,
+                                      filterDishesUseCase: mockFilterUseCase,
+                                      coordinator: makeCoordinator())
         let expectation = XCTestExpectation(description: "Error message set")
         
         // Act
@@ -130,6 +139,7 @@ final class HomeViewModelTests: XCTestCase {
         let mockCoordinator = makeCoordinator()
         let viewModel = HomeViewModel(
             getDishesUseCase: MockGetDishesUseCase(result: .success([])),
+            filterDishesUseCase: MockFilterDishesUseCase(),
             coordinator: mockCoordinator
         )
         let testDish = Dish.mock()
@@ -162,7 +172,7 @@ final class HomeViewModelTests: XCTestCase {
     private func verifySearch(_ query: String, expected: String) {
         let expectation = XCTestExpectation(description: "Wait for search update")
         
-        let viewModel = HomeViewModel(getDishesUseCase: MockGetDishesUseCase(result: .success([Dish.mock(name: expected)])), coordinator: makeCoordinator())
+        let viewModel = HomeViewModel(getDishesUseCase: MockGetDishesUseCase(result: .success([Dish.mock(name: expected)])), filterDishesUseCase: MockFilterDishesUseCase(), coordinator: makeCoordinator())
         
         let cancellable = viewModel.$filteredDishes
             .dropFirst()
