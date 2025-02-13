@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		460AB2252D5AFC980028BA23 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 460AB2242D5AFC980028BA23 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		46EEE0B32D56E69C00C22B47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,19 +28,69 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		460AB26D2D5BF45C0028BA23 /* RecipeApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RecipeApp.xctestplan; sourceTree = "<group>"; };
 		46EEE0A22D56E69900C22B47 /* RecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EEE0B22D56E69C00C22B47 /* RecipeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EEE0BC2D56E69D00C22B47 /* RecipeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		460AB2422D5BBEDB0028BA23 /* Exceptions for "RecipeApp" folder in "RecipeAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Core/DI/AppDependencies.swift,
+				Core/DI/Mocks/MockAppDependencies.swift,
+				Core/DI/PreviewDependencies.swift,
+				Core/Navigation/AppCoordinator.swift,
+				Core/Navigation/AppRoute.swift,
+				Core/Navigation/Coordinator.swift,
+				Data/Models/DishesResponse.swift,
+				Data/Repositories/DishesRepository.swift,
+				Data/Repositories/DishesRepositoryProtocol.swift,
+				Data/Repositories/Mocks/MockDishesRepository.swift,
+				Data/Services/APIError.swift,
+				Data/Services/APIService.swift,
+				Data/Services/APIServiceProtocol.swift,
+				Data/Services/Mocks/MockAPIService.swift,
+				Features/Detail/Presentation/ViewModels/DetailViewModel.swift,
+				Features/Home/Domain/Models/Dish.swift,
+				Features/Home/Domain/Models/DishLocation.swift,
+				Features/Home/Domain/Models/Mocks/MockDish.swift,
+				Features/Home/Domain/UseCases/FilterDishesUseCase.swift,
+				Features/Home/Domain/UseCases/FilterDishesUseCaseProtocol.swift,
+				Features/Home/Domain/UseCases/GetDishesUseCase.swift,
+				Features/Home/Domain/UseCases/GetDishesUseCaseProtocol.swift,
+				Features/Home/Domain/UseCases/Mocks/MockFilterDishesUseCase.swift,
+				Features/Home/Domain/UseCases/Mocks/MockGetDishesUseCase.swift,
+				Features/Home/Presentation/ViewModels/HomeViewModel.swift,
+				Features/Map/Presentation/ViewModels/MapViewModel.swift,
+				Utilities/HTTPMethod.swift,
+			);
+			target = 46EEE0B12D56E69C00C22B47 /* RecipeAppTests */;
+		};
+		460AB2602D5BDB2B0028BA23 /* Exceptions for "RecipeAppTests" folder in "RecipeAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				RecipeAppTests.swift,
+			);
+			target = 46EEE0B12D56E69C00C22B47 /* RecipeAppTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		46EEE0A42D56E69900C22B47 /* RecipeApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				460AB2422D5BBEDB0028BA23 /* Exceptions for "RecipeApp" folder in "RecipeAppTests" target */,
+			);
 			path = RecipeApp;
 			sourceTree = "<group>";
 		};
 		46EEE0B52D56E69C00C22B47 /* RecipeAppTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				460AB2602D5BDB2B0028BA23 /* Exceptions for "RecipeAppTests" folder in "RecipeAppTests" target */,
+			);
 			path = RecipeAppTests;
 			sourceTree = "<group>";
 		};
@@ -52,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				460AB2252D5AFC980028BA23 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +130,7 @@
 		46EEE0992D56E69900C22B47 = {
 			isa = PBXGroup;
 			children = (
+				460AB26D2D5BF45C0028BA23 /* RecipeApp.xctestplan */,
 				46EEE0A42D56E69900C22B47 /* RecipeApp */,
 				46EEE0B52D56E69C00C22B47 /* RecipeAppTests */,
 				46EEE0BF2D56E69D00C22B47 /* RecipeAppUITests */,
@@ -112,6 +168,7 @@
 			);
 			name = RecipeApp;
 			packageProductDependencies = (
+				460AB2242D5AFC980028BA23 /* Kingfisher */,
 			);
 			productName = RecipeApp;
 			productReference = 46EEE0A22D56E69900C22B47 /* RecipeApp.app */;
@@ -121,6 +178,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46EEE0C92D56E69D00C22B47 /* Build configuration list for PBXNativeTarget "RecipeAppTests" */;
 			buildPhases = (
+				46450F562D5D344B00A612AF /* Swiflint */,
 				46EEE0AE2D56E69C00C22B47 /* Sources */,
 				46EEE0AF2D56E69C00C22B47 /* Frameworks */,
 				46EEE0B02D56E69C00C22B47 /* Resources */,
@@ -195,6 +253,9 @@
 			);
 			mainGroup = 46EEE0992D56E69900C22B47;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				460AB2232D5AFC980028BA23 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 46EEE0A32D56E69900C22B47 /* Products */;
 			projectDirPath = "";
@@ -230,6 +291,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		46450F562D5D344B00A612AF /* Swiflint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiflint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint no está instalado, usa 'brew install swiftlint'\"\nfi\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		46EEE09E2D56E69900C22B47 /* Sources */ = {
@@ -321,7 +403,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -378,7 +460,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -402,8 +484,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -432,8 +513,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -456,7 +536,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FCYRT7JM;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rapser.RecipeAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -475,7 +555,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FCYRT7JM;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rapser.RecipeAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -493,6 +573,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FCYRT7JM;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rapser.RecipeAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -510,6 +591,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6FCYRT7JM;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rapser.RecipeAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -560,6 +642,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		460AB2232D5AFC980028BA23 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		460AB2242D5AFC980028BA23 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 460AB2232D5AFC980028BA23 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 46EEE09A2D56E69900C22B47 /* Project object */;
 }

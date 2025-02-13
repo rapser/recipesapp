@@ -1,0 +1,47 @@
+# 🚀 SwiftLint Config - Personalizado para SwiftUI
+
+# Reglas deshabilitadas (permitidas)
+disabled_rules:
+  - force_cast            # Evitar 'as!' (Forzar casting)
+  - force_try             # Evitar 'try!' (Forzar errores)
+  - force_unwrapping      # Evitar '!' en opcionales no seguros
+  - trailing_whitespace   # Permitir espacios al final de línea
+  - cyclomatic_complexity # No restringir la complejidad ciclomática
+
+# Reglas opcionales activadas (buena práctica)
+opt_in_rules:
+  - empty_count           # Prefiere `.isEmpty` sobre `count == 0`
+  - explicit_init         # Requiere `init()` explícito en clases y structs
+  - closure_spacing       # Espaciado adecuado en closures `{ x in }`
+  - function_default_parameter_at_end # Los parámetros opcionales deben ir al final
+
+# Configuración general
+line_length: 120  # Longitud máxima de línea
+indentation: spaces # Usa espacios en lugar de tabs
+type_name:
+  min_length: 3 # Nombres de clases, structs y enums con al menos 3 caracteres
+  max_length: 50 # Máximo 50 caracteres en nombres de tipo
+
+# Archivos o directorios excluidos (si usas Pods o SPM)
+excluded:
+  - Carthage
+  - Pods
+  - fastlane
+  - .build
+
+# 🚨 Reglas estrictas que deben cumplirse
+custom_rules:
+  no_print_statements: # Prohíbe `print()` en producción
+    included: ".*\\.swift"
+    name: "No usar print() en código final"
+    regex: "print\\("
+    message: "Usa Logger o NSLog en lugar de print()"
+    severity: warning
+
+  no_todo_comments: # Evitar comentarios TODO en código final
+    included: ".*\\.swift"
+    name: "Evita TODO en producción"
+    regex: "(TODO|FIXME)"
+    message: "Elimina los comentarios TODO antes de hacer un commit"
+    severity: error
+

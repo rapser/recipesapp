@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='RecipeAppTests.xctest' tests='15' failures='0'>
+  <testsuite name='RecipeAppTests.AppCoordinatorTests' tests='5' failures='0'>
+    <testcase classname='RecipeAppTests.AppCoordinatorTests' name='testPopOnEmptyNavigationPath' time='0.006'/>
+    <testcase classname='RecipeAppTests.AppCoordinatorTests' name='testPopRoute' time='0.003'/>
+    <testcase classname='RecipeAppTests.AppCoordinatorTests' name='testPopToRoot' time='0.002'/>
+    <testcase classname='RecipeAppTests.AppCoordinatorTests' name='testPushMultipleRoutes' time='0.002'/>
+    <testcase classname='RecipeAppTests.AppCoordinatorTests' name='testPushRoute' time='0.002'/>
+  </testsuite>
+  <testsuite name='RecipeAppTests.GetDishesUseCaseTests' tests='3' failures='0'>
+    <testcase classname='RecipeAppTests.GetDishesUseCaseTests' name='testExecuteEmptyResponse' time='0.003'/>
+    <testcase classname='RecipeAppTests.GetDishesUseCaseTests' name='testExecuteFailure' time='0.006'/>
+    <testcase classname='RecipeAppTests.GetDishesUseCaseTests' name='testExecuteSuccess' time='0.003'/>
+  </testsuite>
+  <testsuite name='RecipeAppTests.HomeViewModelTests' tests='7' failures='0'>
+    <testcase classname='RecipeAppTests.HomeViewModelTests' name='testLoadDishesFailure' time='0.004'/>
+    <testcase classname='RecipeAppTests.HomeViewModelTests' name='testLoadDishesSuccess' time='0.003'/>
+    <testcase classname='RecipeAppTests.HomeViewModelTests' name='testNavigateToDetail' time='0.005'/>
+    <testcase classname='RecipeAppTests.HomeViewModelTests' name='testSearchFilterByName' time='0.177'/>
+    <testcase classname='RecipeAppTests.HomeViewModelTests' name='testSearchFilterIgnoresCaseAndDiacritics' time='0.105'/>
+    <testcase classname='RecipeAppTests.HomeViewModelTests' name='testSearchWithSpecialCharacters' time='0.104'/>
+    <testcase classname='RecipeAppTests.HomeViewModelTests' name='testUnexpectedErrorHandling' time='0.002'/>
+  </testsuite>
+</testsuites>
