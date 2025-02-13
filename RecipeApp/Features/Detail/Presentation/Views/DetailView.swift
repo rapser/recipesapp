@@ -13,7 +13,6 @@ struct DetailView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            
             DishImageView(photoURL: viewModel.dish.photo)
             DishDescriptionView(description: viewModel.dish.description)
             IngredientsListView(ingredients: viewModel.dish.ingredients)

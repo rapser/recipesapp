@@ -17,4 +17,18 @@ extension View {
             Text(errorMessage.wrappedValue ?? "")
         }
     }
+
+    func errorAlert(errorMessage: Binding<String?>, retryAction: @escaping () -> Void) -> some View {
+        alert("Error", isPresented: .constant(errorMessage.wrappedValue != nil)) {
+            Button("Cancelar", role: .cancel) {
+                errorMessage.wrappedValue = nil
+            }
+            Button("Reintentar") {
+                errorMessage.wrappedValue = nil
+                retryAction()
+            }
+        } message: {
+            Text(errorMessage.wrappedValue ?? "Ha ocurrido un error inesperado.")
+        }
+    }
 }

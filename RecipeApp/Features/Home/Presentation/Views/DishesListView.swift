@@ -14,7 +14,6 @@ struct DishesListView: View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
                 if viewModel.isLoading {
-                    // Mostrar Skeleton mientras se cargan los datos
                     ForEach(0..<6, id: \.self) { _ in
                         DishSkeletonView()
                     }

@@ -48,29 +48,37 @@ final class HomeViewModel: ObservableObject {
         getDishesUseCase.execute()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
-                self?.isLoading = false
+                guard let self = self else { return }
+                self.isLoading = false
                 
                 if case .failure(let error) = completion {
-                    self?.handleError(error)
+                    self.handleError(error)
                 }
             } receiveValue: { [weak self] dishes in
-                self?.dishes = dishes
-                self?.errorMessage = nil  // Limpiar mensajes de error previos
+                guard let self = self else { return }
+                self.dishes = dishes
+                self.errorMessage = nil
             }
             .store(in: &cancellables)
     }
     
+    func retryLoading() {
+        loadDishes()
+    }
+    
     private func handleError(_ error: Error) {
         let errorMessage: String
-        
+
         if let apiError = error as? APIError {
-            errorMessage = apiError.errorDescription ?? "Error desconocido"
-            print("Error técnico: \(apiError)")  // Log para depuración
+            errorMessage = apiError.errorDescription ?? "Error desconocido en la API"
+            print("API Error: \(apiError.localizedDescription)")
         } else {
-            errorMessage = error.localizedDescription
+            errorMessage = "Error inesperado: \(error.localizedDescription)"
         }
-        
-        self.errorMessage = errorMessage
+
+        DispatchQueue.main.async {
+            self.errorMessage = errorMessage
+        }
     }
     
     // MARK: - Search
@@ -78,24 +86,24 @@ final class HomeViewModel: ObservableObject {
         guard !text.isEmpty else { return dishes }
         
         let cleanedSearchText = text
-            .trimmingCharacters(in: .whitespaces)
-            .components(separatedBy: .alphanumerics.inverted)
-            .joined()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
             .applyingTransform(.stripDiacritics, reverse: false)?
             .lowercased() ?? text.lowercased()
-        
+
         return dishes.filter { dish in
             let normalizedDishName = dish.name
                 .applyingTransform(.stripDiacritics, reverse: false)?
                 .lowercased() ?? dish.name.lowercased()
             
-            return normalizedDishName.contains(cleanedSearchText) ||
-            dish.ingredients.contains { ingredient in
+            let matchesName = normalizedDishName.contains(cleanedSearchText)
+            let matchesIngredient = dish.ingredients.contains { ingredient in
                 ingredient
                     .applyingTransform(.stripDiacritics, reverse: false)?
                     .lowercased()
                     .contains(cleanedSearchText) ?? false
             }
+            
+            return matchesName || matchesIngredient
         }
     }
     
@@ -104,4 +112,3 @@ final class HomeViewModel: ObservableObject {
         coordinator.push(.dishDetail(dish))
     }
 }
-

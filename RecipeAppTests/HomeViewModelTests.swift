@@ -142,7 +142,6 @@ final class HomeViewModelTests: XCTestCase {
         XCTAssertEqual(mockCoordinator.navigationPath.first, .dishDetail(testDish))
     }
 
-
     // MARK: - 🛠 Helpers
     private func makeCoordinator() -> AppCoordinator {
         return AppCoordinator(dependencies: MockAppDependencies())

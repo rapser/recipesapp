@@ -17,7 +17,9 @@ struct HomeView: View {
                 DishesListView(viewModel: viewModel)
             }
             .navigationTitle("Recetas")
-            .errorAlert(errorMessage: $viewModel.errorMessage)
+            .errorAlert(errorMessage: $viewModel.errorMessage, retryAction: {
+                viewModel.retryLoading()
+            })
         }
     }
 }
