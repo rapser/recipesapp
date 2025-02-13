@@ -33,10 +33,11 @@ final class HomeViewModel: ObservableObject {
     // MARK: - Setup
     private func setupBindings() {
         $searchText
+            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
+            .removeDuplicates()
             .combineLatest($dishes)
-            .map { [weak self] text, dishes in
-                guard let self = self else { return [] }
-                return self.filterDishes(text: text, dishes: dishes)
+            .map { text, dishes in
+                self.filterDishes(text: text, dishes: dishes)
             }
             .receive(on: DispatchQueue.main)
             .assign(to: &$filteredDishes)
@@ -45,19 +46,19 @@ final class HomeViewModel: ObservableObject {
     // MARK: - Data Handling
     private func loadDishes() {
         isLoading = true
+        
         getDishesUseCase.execute()
             .receive(on: DispatchQueue.main)
+            .handleEvents(receiveCompletion: { [weak self] _ in
+                self?.isLoading = false
+            })
             .sink { [weak self] completion in
-                guard let self = self else { return }
-                self.isLoading = false
-                
                 if case .failure(let error) = completion {
-                    self.handleError(error)
+                    self?.handleError(error)
                 }
             } receiveValue: { [weak self] dishes in
-                guard let self = self else { return }
-                self.dishes = dishes
-                self.errorMessage = nil
+                self?.dishes = dishes
+                self?.errorMessage = nil
             }
             .store(in: &cancellables)
     }
@@ -69,41 +70,44 @@ final class HomeViewModel: ObservableObject {
     private func handleError(_ error: Error) {
         let errorMessage: String
 
-        if let apiError = error as? APIError {
+        switch error {
+        case let apiError as APIError:
             errorMessage = apiError.errorDescription ?? "Error desconocido en la API"
-            print("API Error: \(apiError.localizedDescription)")
-        } else {
+            debugPrint("API Error: \(apiError.localizedDescription)")
+        default:
             errorMessage = "Error inesperado: \(error.localizedDescription)"
         }
 
-        DispatchQueue.main.async {
-            self.errorMessage = errorMessage
+        DispatchQueue.main.async { [weak self] in
+            self?.errorMessage = errorMessage
         }
     }
     
     // MARK: - Search
     private func filterDishes(text: String, dishes: [Dish]) -> [Dish] {
-        guard !text.isEmpty else { return dishes }
-        
+        guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return dishes }
+
         let cleanedSearchText = text
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .applyingTransform(.stripDiacritics, reverse: false)?
             .lowercased() ?? text.lowercased()
 
-        return dishes.filter { dish in
+        return dishes.lazy.filter { dish in
             let normalizedDishName = dish.name
                 .applyingTransform(.stripDiacritics, reverse: false)?
                 .lowercased() ?? dish.name.lowercased()
-            
-            let matchesName = normalizedDishName.contains(cleanedSearchText)
-            let matchesIngredient = dish.ingredients.contains { ingredient in
-                ingredient
-                    .applyingTransform(.stripDiacritics, reverse: false)?
-                    .lowercased()
-                    .contains(cleanedSearchText) ?? false
+
+            if normalizedDishName.contains(cleanedSearchText) {
+                return true
             }
-            
-            return matchesName || matchesIngredient
+
+            return dish.ingredients.contains { ingredient in
+                let normalizedIngredient = ingredient
+                    .applyingTransform(.stripDiacritics, reverse: false)?
+                    .lowercased() ?? ingredient.lowercased()
+                
+                return normalizedIngredient.contains(cleanedSearchText)
+            }
         }
     }
     

@@ -33,7 +33,7 @@ struct LocationDetailView: View {
                     }
                 }
             }
-            .frame(maxHeight: 200) // Altura máxima para el ScrollView
+            .frame(maxHeight: 200)
         }
         .padding()
     }

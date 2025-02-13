@@ -12,20 +12,22 @@ struct MapView: View {
     @ObservedObject var viewModel: MapViewModel
     
     var body: some View {
+        let dish = viewModel.dish
+
         Map(position: $viewModel.position, interactionModes: .all) {
-            Annotation(viewModel.dish.name, coordinate: viewModel.dish.location.coordinate) {
-                MapAnnotationView(dishName: viewModel.dish.name) {
-                    viewModel.selectedLocation = viewModel.dish
+            Annotation(dish.name, coordinate: dish.location.coordinate) {
+                MapAnnotationView(dishName: dish.name) {
+                    viewModel.selectedLocation = dish
                 }
+                .accessibilityLabel("Ubicación de la receta: \(dish.name)")
+                .accessibilityHint("Toca para ver más detalles sobre el origen de \(dish.name)")
             }
         }
         .navigationTitle("Origen de la Receta")
         .sheet(item: $viewModel.selectedLocation) { dish in
             LocationDetailView(dish: dish)
-                .presentationDetents([.medium])
+                .presentationDetents([.medium, .fraction(0.75)])
         }
-        
-        
     }
 }
 

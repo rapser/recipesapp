@@ -19,7 +19,7 @@ struct MapAnnotationView: View {
                 .foregroundColor(.blue)
                 .padding(10)
                 .background(Color.white.opacity(0.9))
-                .clipShape(Circle()) // Fondo circular
+                .clipShape(Circle())
                 .overlay(
                     Circle()
                         .stroke(Color.blue, lineWidth: 2)
