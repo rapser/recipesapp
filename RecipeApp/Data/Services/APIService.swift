@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 class APIService: APIServiceProtocol {
-    private let baseURL = "https://demo8302872.mockable.io"
+    
+    private let baseURL = "https://run.mocky.io/v3/2e8deda5-3c8d-4a7d-bce9-8f302a4ef967"
     
     func request<T: Decodable>(
         endpoint: String,
