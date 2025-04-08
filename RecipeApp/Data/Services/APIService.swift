@@ -10,8 +10,8 @@ import Combine
 
 class APIService: APIServiceProtocol {
     
-    private let baseURL = "https://run.mocky.io/v3/2e8deda5-3c8d-4a7d-bce9-8f302a4ef967"
-    
+    private let baseURL = Configurator.baseURL
+
     func request<T: Decodable>(
         endpoint: String,
         method: HTTPMethod,
@@ -19,7 +19,7 @@ class APIService: APIServiceProtocol {
         headers: [String: String]? = nil
     ) -> AnyPublisher<T, Error> {
         
-        guard let url = URL(string: "\(baseURL)/\(endpoint)") else {
+        guard let url = URL(string: "\(baseURL)/\(endpoint).json") else {
             return Fail(error: APIError.invalidURL).eraseToAnyPublisher()
         }
         
